@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d203eedb4d3dc5c01703a6fd888f14a1",
+    "revision": "f928a48acfceceb6f2e6b10405d94b1c",
     "url": "/deploy_react_tetris/index.html"
   },
   {
-    "revision": "aa494a494863f398335b",
+    "revision": "10fcc29afa9985c3b808",
     "url": "/deploy_react_tetris/static/css/main.64c8d670.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/deploy_react_tetris/static/js/2.781ed2fe.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "aa494a494863f398335b",
-    "url": "/deploy_react_tetris/static/js/main.92fb0c15.chunk.js"
+    "revision": "10fcc29afa9985c3b808",
+    "url": "/deploy_react_tetris/static/js/main.2eaef4db.chunk.js"
   },
   {
     "revision": "15ccef9c3741954eb54e",
