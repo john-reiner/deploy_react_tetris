@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/jareiner90/deploy_react_tetris.git/static/css/main.254a9706.chunk.css",
+    "main.js": "/jareiner90/deploy_react_tetris.git/static/js/main.47512e25.chunk.js",
+    "main.js.map": "/jareiner90/deploy_react_tetris.git/static/js/main.47512e25.chunk.js.map",
+    "runtime-main.js": "/jareiner90/deploy_react_tetris.git/static/js/runtime-main.4f21b161.js",
+    "runtime-main.js.map": "/jareiner90/deploy_react_tetris.git/static/js/runtime-main.4f21b161.js.map",
+    "static/js/2.7862061d.chunk.js": "/jareiner90/deploy_react_tetris.git/static/js/2.7862061d.chunk.js",
+    "static/js/2.7862061d.chunk.js.map": "/jareiner90/deploy_react_tetris.git/static/js/2.7862061d.chunk.js.map",
+    "index.html": "/jareiner90/deploy_react_tetris.git/index.html",
+    "precache-manifest.a772c9c942065cde795bf5f73c5ca780.js": "/jareiner90/deploy_react_tetris.git/precache-manifest.a772c9c942065cde795bf5f73c5ca780.js",
+    "service-worker.js": "/jareiner90/deploy_react_tetris.git/service-worker.js",
+    "static/css/main.254a9706.chunk.css.map": "/jareiner90/deploy_react_tetris.git/static/css/main.254a9706.chunk.css.map",
+    "static/js/2.7862061d.chunk.js.LICENSE.txt": "/jareiner90/deploy_react_tetris.git/static/js/2.7862061d.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/jareiner90/deploy_react_tetris.git/static/media/Pixel-LCD-7.e2897552.woff",
+    "static/media/background.jpg": "/jareiner90/deploy_react_tetris.git/static/media/background.c408b725.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4f21b161.js",
+    "static/js/2.7862061d.chunk.js",
+    "static/css/main.254a9706.chunk.css",
+    "static/js/main.47512e25.chunk.js"
+  ]
+}
