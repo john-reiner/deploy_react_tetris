@@ -14,10 +14,10 @@ import MainBody from './components/MainBody';
 const App = () =>  {
 
   const [users, setUsers] = useState([])
-  const [userId, setUserId] = useState('')
+  const [userId, setUserId] = useState('1')
   const [loginShow, setLoginShow] = useState(true);
   const [signUpShow, setSignUpShow] = useState(false)
-  const [username, setUsername] = useState('')
+  const [username, setUsername] = useState('guest')
 
   const handleLoginShow = () => setLoginShow(true);
   const handleLoginClose = () => setLoginShow(false);
@@ -41,7 +41,7 @@ const App = () =>  {
   }, [userId])
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/v1/users')
+    fetch('https://blooming-brushlands-29268.herokuapp.com/api/v1/users')
     .then(response => response.json())
     .then(users => setUsers(users))
   }, [loginShow])

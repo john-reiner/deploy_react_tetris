@@ -7,7 +7,7 @@ export default function NavBar(props) {
         <div>
             <ul>
                 <Link to="/leaderBoard"><li>Leader Board</li></Link>
-                <Link to='/'><li>Tetris</li></Link>
+                <Link to='/deploy_react_tetris/'><li>Tetris</li></Link>
                 <li id='user'>{props.username}</li>
             </ul>
         </div>

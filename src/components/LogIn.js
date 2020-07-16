@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import {Button, Modal, Form} from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 
 export default function LogIn(props) {
 
@@ -13,9 +12,17 @@ export default function LogIn(props) {
 
     const onSubmit = e => {
         e.preventDefault()
+        loginUser()
+    }
+
+    const loginUser = () => {
         let user = props.users.find(user => user.username === username)
-        setUser(user)
-        props.handleLoginClose()
+        if (user && user.password ===  password) {
+            setUser(user)
+            props.handleLoginClose()
+        } else {
+            alert('Wrong Username or Password')
+        }
     }
 
     useEffect(() => {
