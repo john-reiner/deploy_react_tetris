@@ -4,10 +4,11 @@ import Score from './Score'
 
 export default function leaderBoard(props) {
     
+    console.log(props.scores)
+
     const renderScores = () => {
         let count = 0
         return props.scores.map(score => {
-            
             return <Score place={count += 1} key={score.id} id={score.id} username={score.user.username} score={score.points} level={score.level} rows={score.rows} />
         })
     }

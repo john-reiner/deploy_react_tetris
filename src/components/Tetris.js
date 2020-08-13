@@ -31,7 +31,7 @@ const Tetris = (props) => {
     );
 
     useEffect(() => {
-        fetch('https://blooming-brushlands-29268.herokuapp.com/api/v1/scores')
+        fetch('https://react-tetris-backend.herokuapp.com/api/v1/scores')
         .then(response => response.json())
         .then(scores => setScores(scores))
     }, [gameOver])
@@ -105,13 +105,13 @@ const Tetris = (props) => {
     }, dropTime)
 
     const fetchScore = () => {
-        fetch("https://blooming-brushlands-29268.herokuapp.com/api/v1/scores", {
+        fetch("https://react-tetris-backend.herokuapp.com/api/v1/scores", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                user_id: props.userId,
+                user_id: props.loggedinUser.id,
                 points: score,
                 rows: rows,
                 level: level
@@ -122,7 +122,7 @@ const Tetris = (props) => {
     return (
         
     <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)} onKeyUp={keyUp}>
-        <NavBar username={props.username}/>
+        <NavBar loggedinUser={props.loggedinUser}/>
         <Route exact path="/leaderBoard" render={() => <LeaderBoard scores={scores}/>}/>
         <Route path="/sign-up" render={() => <SignUp/ >} />
         <Route exact path="/deploy_react_tetris/" render={() => 

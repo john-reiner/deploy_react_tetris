@@ -8,7 +8,7 @@ export default function NavBar(props) {
             <ul>
                 <Link to="/leaderBoard"><li>Leader Board</li></Link>
                 <Link to='/deploy_react_tetris/'><li>Tetris</li></Link>
-                <li id='user'>{props.username}</li>
+                <li id='user'>{props.loggedinUser.username}</li>
             </ul>
         </div>
     )

@@ -16,7 +16,7 @@ export default function LogIn(props) {
     const onSubmit = e => {
         e.preventDefault()
         if (username !== '' && password !== '' && password === confirmedPassword) {
-            fetch("https://blooming-brushlands-29268.herokuapp.com/api/v1/users", {
+            fetch("https://react-tetris-backend.herokuapp.com/api/v1/users", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
