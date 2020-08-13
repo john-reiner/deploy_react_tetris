@@ -2,37 +2,6 @@ import React from 'react'
 import {Button, Modal, Form} from 'react-bootstrap'
 
 export default function LogIn(props) {
-
-    // const [username, setUsername] = useState('')
-    // const [password, setPassword] = useState('')
-    // const [user, setUser] = useState({})
-
-    // const handleUsernameChange = e => setUsername(e.target.value)
-    // const handlePasswordChange = e => setPassword(e.target.value)
-
-    // const onSubmit = e => {
-    //     e.preventDefault()
-    //     loginUser()
-    // }
-
-    // const loginUser = () => {
-    //     fetch('https://react-tetris-backend.herokuapp.com/api/v1/users')
-    //     .then(response => response.json())
-    //     .then(users => {
-    //         let user = users.find(user => user.username === username)
-    //         if (user && user.password ===  password) {
-    //             setUser(user)
-    //             props.handleLoginClose()
-    //         } else {
-    //             alert('Wrong Username or Password')
-    //         }
-    //     })
-    // }
-
-    // useEffect(() => {
-    //     props.logginUser(user.id)
-    // }, [user])
-    
     
     return (
         <div>
