@@ -9,7 +9,7 @@ const App = () =>  {
 
   const [loginShow, setLoginShow] = useState(true);
   const [signUpShow, setSignUpShow] = useState(false)
-  const [username, setUsername] = useState('guest')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loggedinUser, setLoggedinUser] = useState({})
 
