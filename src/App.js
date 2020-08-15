@@ -12,6 +12,7 @@ const App = () =>  {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loggedinUser, setLoggedinUser] = useState({})
+  const [loggingIn, setLoggingIn] = useState(false)
 
   const handleLoginShow = () => setLoginShow(true);
   const handleLoginClose = () => setLoginShow(false);
@@ -27,11 +28,14 @@ const App = () =>  {
             let user = users.find(user => user.username === username)
             if (user && user.password ===  password) {
                 setLoggedinUser(user)
+                setLoggingIn(false)
                 handleLoginClose()
             } else {
                 alert('Wrong Username or Password')
+                setLoggingIn(false)
             }
         })
+        setLoggingIn(true)
     }
 
   const handleLoginSubmit = e => {
@@ -47,7 +51,7 @@ const App = () =>  {
   return (
     <div className="App">
       
-      <LogIn username={username} password={password} handlePasswordChange={handlePasswordChange} handleUsernameChange={handleUsernameChange} handleCreateAccountClick={handleCreateAccountClick} handleLoginSubmit={handleLoginSubmit} handleLoginClose={handleLoginClose} loginShow={loginShow}/>
+      <LogIn loggingIn={loggingIn} username={username} password={password} handlePasswordChange={handlePasswordChange} handleUsernameChange={handleUsernameChange} handleCreateAccountClick={handleCreateAccountClick} handleLoginSubmit={handleLoginSubmit} handleLoginClose={handleLoginClose} loginShow={loginShow}/>
       <SignUp handleLoginShow={handleLoginShow} signUpShow={signUpShow} handleSignUpClose={handleSignUpClose} />
       <Tetris loggedinUser={loggedinUser} />
 

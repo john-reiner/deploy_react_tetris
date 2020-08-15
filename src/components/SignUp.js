@@ -60,9 +60,6 @@ export default function LogIn(props) {
                     <Button variant="primary" type='submit' form='form' >
                         Sign Up!
                     </Button>
-                    <Button variant="secondary" onClick={props.handleSignUpClose}>
-                        Play as guest
-                    </Button>
                 </Modal.Footer>
             </Modal>
         </div>

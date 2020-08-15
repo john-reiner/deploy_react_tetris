@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Modal, Form} from 'react-bootstrap'
+import {Button, Modal, Form, Spinner} from 'react-bootstrap'
 
 export default function LogIn(props) {
     
@@ -25,12 +25,7 @@ export default function LogIn(props) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" type='submit' form='form' >
-                        Login
-                    </Button>
-                    <Button variant="secondary" onClick={props.handleLoginClose}>
-                        Login as guest
-                    </Button>
+                    {props.loggingIn === true ?   <Button style={{fontFamily : "Pixel, Arial, Helvetica, sans-serif"}} variant="dark" disabled><Spinner variant="light" as="span" animation="grow" size="sm" role="status" aria-hidden="true"/>Loading...</Button> : <Button variant="primary" type='submit' form='form' >Login</Button>}
                 </Modal.Footer>
             </Modal>
         </div>
