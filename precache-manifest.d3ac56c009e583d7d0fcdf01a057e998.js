@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "af586d076beae5c50922b3a762608d74",
+    "revision": "b58c8ba6a86321225b8ae2d5421c0b10",
     "url": "/deploy_react_tetris/index.html"
   },
   {
-    "revision": "fd01b7c19bdc0bef94b2",
+    "revision": "85e7b9eb7be262c6b147",
     "url": "/deploy_react_tetris/static/css/main.64c8d670.chunk.css"
   },
   {
-    "revision": "5623469a45e3c5882690",
-    "url": "/deploy_react_tetris/static/js/2.bf0cd7c6.chunk.js"
+    "revision": "da8e45280744dbb9be35",
+    "url": "/deploy_react_tetris/static/js/2.b44fa38d.chunk.js"
   },
   {
     "revision": "3453b8997016469371284a28c0e873e2",
-    "url": "/deploy_react_tetris/static/js/2.bf0cd7c6.chunk.js.LICENSE.txt"
+    "url": "/deploy_react_tetris/static/js/2.b44fa38d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "fd01b7c19bdc0bef94b2",
-    "url": "/deploy_react_tetris/static/js/main.e64590b8.chunk.js"
+    "revision": "85e7b9eb7be262c6b147",
+    "url": "/deploy_react_tetris/static/js/main.91e35ab3.chunk.js"
   },
   {
     "revision": "15ccef9c3741954eb54e",
