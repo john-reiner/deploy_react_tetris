@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom'
 export default function NavBar(props) {
 
     return (
+
         <div>
             <ul>
                 <Link to="/leaderBoard"><li>Leader Board</li></Link>
                 <Link to='/deploy_react_tetris/'><li>Tetris</li></Link>
-                <li id='user'>{props.loggedinUser.username}</li>
+                <li id='user' onClick={props.handleUserModalShow}>{props.loggedinUser.username}</li>
             </ul>
         </div>
+
     )
 }

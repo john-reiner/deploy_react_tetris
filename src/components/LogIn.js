@@ -4,9 +4,8 @@ import {Button, Modal, Form, Spinner} from 'react-bootstrap'
 export default function LogIn(props) {
     
     return (
-        <div>
-            <Modal show={props.loginShow} >
-                <Modal.Header >
+            <Modal show={props.loginShow} onHide={props.handleLoginClose} backdrop="static" keyboard={false} >
+                <Modal.Header>
                 <Modal.Title>Welcome to Tetris in React!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -30,6 +29,5 @@ export default function LogIn(props) {
                     
                 </Modal.Footer>
             </Modal>
-        </div>
     )
 }

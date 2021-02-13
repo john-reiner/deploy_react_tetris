@@ -4,6 +4,8 @@ import './App.css';
 import Tetris from './components/Tetris';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
+import NavBar from './components/NavBar'
+import DisplayUser from './components/DisplayUser'
 
 const App = () =>  {
 
@@ -14,13 +16,21 @@ const App = () =>  {
   const [loggedinUser, setLoggedinUser] = useState({})
   const [loggingIn, setLoggingIn] = useState(false)
   const [errors, setErrors] = useState('')
+  const [userModalShow, setUserModalShow] = useState(false)
 
   const handleLoginShow = () => setLoginShow(true);
   const handleLoginClose = () => setLoginShow(false);
   const handleSignUpClose = () => setSignUpShow(false)
+  const handleUserModalShow = () => setUserModalShow(true)
+  const handleUserModalClose = () => setUserModalShow(false)
 
   const handleUsernameChange = e => setUsername(e.target.value)
   const handlePasswordChange = e => setPassword(e.target.value)
+
+  const logout = () => {
+    localStorage.removeItem('userToken');
+    window.location.reload(false);
+  }
 
   useEffect(() => {
     if (localStorage.getItem('userToken')) {
@@ -54,7 +64,6 @@ const App = () =>  {
     .then(user => {
       if (user.status === 'success') {
           localStorage.setItem('userToken', user.token);
-          console.log(user)
           setLoggedinUser({id: user.id, username: user.username})
           setLoggingIn(false)
           handleLoginClose()
@@ -78,7 +87,7 @@ const App = () =>  {
 
   return (
     <div className="App">
-      
+
       <LogIn 
         errors={errors} 
         loggingIn={loggingIn} 
@@ -100,9 +109,16 @@ const App = () =>  {
 
       />
 
+      <DisplayUser 
+        userModalShow={userModalShow}
+        handleUserModalClose={handleUserModalClose}
+        logout={logout}
+      />
+
       <Tetris 
         loggedinUser={loggedinUser}
-
+        handleUserModalShow={handleUserModalShow}
+        
       />
 
     </div>

@@ -4,14 +4,19 @@ import Score from './Score'
 
 export default function leaderBoard(props) {
     
-    console.log(props.scores)
 
-    const renderScores = () => {
-        let count = 0
-        return props.scores.map(score => {
-            return <Score place={count += 1} key={score.id} id={score.id} username={score.user.username} score={score.points} level={score.level} rows={score.rows} />
-        })
+    const renderAllScores = () => {
+
+        if (props.scores.length > 0) {
+            let count = 0
+            return props.scores.map(score => {
+                count ++
+                return <Score place={count} username={score.user.username} key={score.id} id={score.id} score={score.points} level={score.level} rows={score.rows} />
+            })            
+        }
     }
+
+
 
     return (
         <Table striped bordered hover variant="dark">
@@ -25,7 +30,7 @@ export default function leaderBoard(props) {
                 </tr>
             </thead>
             <tbody>
-                {renderScores()}
+                {renderAllScores()}
             </tbody>
         </Table>
     )

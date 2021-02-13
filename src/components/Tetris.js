@@ -24,6 +24,8 @@ const Tetris = (props) => {
     const [dropTime, setDropTime] = useState(null);
     const [gameOver, setGameOver] = useState(false);
     const [scores, setScores] = useState([])
+    const [userScores, setUserScores] = useState([])
+    const [lastScore, setLastScore] = useState({})
     const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
     const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
     const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(
@@ -31,10 +33,20 @@ const Tetris = (props) => {
     );
 
     useEffect(() => {
-        fetch('https://react-tetris-backend.herokuapp.com/api/v1/scores')
+        fetch('https://react-tetris-backend.herokuapp.com/api/v2/scores',{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "bearer " + localStorage.getItem('userToken')
+            }
+        })
         .then(response => response.json())
-        .then(scores => setScores(scores))
-    }, [gameOver])
+        .then(scores => {
+            // console.log(scores)
+            setScores(scores.all_scores)
+            setUserScores(scores.user_scores)
+        })
+    }, [lastScore, props.loggedinUser])
 
     const movePlayer = dir => {
         if (!checkCollision(player, stage, { x: dir, y: 0 })) {
@@ -67,7 +79,7 @@ const Tetris = (props) => {
             setGameOver(true);
             setDropTime(null);
             // fetchLevel(level)
-            fetchScore(score)
+            fetchScore()
             }
             updatePlayerPos({ x: 0, y: 0, collided: true });
         }
@@ -105,10 +117,11 @@ const Tetris = (props) => {
     }, dropTime)
 
     const fetchScore = () => {
-        fetch("https://react-tetris-backend.herokuapp.com/api/v1/scores", {
+        fetch("https://react-tetris-backend.herokuapp.com/api/v2/scores", {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': "bearer " + localStorage.getItem('userToken')
             },
             body: JSON.stringify({
                 user_id: props.loggedinUser.id,
@@ -117,12 +130,19 @@ const Tetris = (props) => {
                 level: level
             })
         })
+        .then(response => response.json())
+        .then(score => {
+            setLastScore(score)
+        })
     }
 
     return (
         
     <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)} onKeyUp={keyUp}>
-        <NavBar loggedinUser={props.loggedinUser}/>
+        <NavBar 
+            loggedinUser={props.loggedinUser}
+            handleUserModalShow={props.handleUserModalShow}
+        />
         <Route exact path="/leaderBoard" render={() => <LeaderBoard scores={scores}/>}/>
         <Route path="/sign-up" render={() => <SignUp/ >} />
         <Route exact path="/deploy_react_tetris/" render={() => 
