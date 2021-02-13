@@ -5,8 +5,8 @@ export default function LogIn(props) {
     
     return (
         <div>
-            <Modal show={props.loginShow} onHide={props.handleLoginClose} >
-                <Modal.Header closeButton>
+            <Modal show={props.loginShow} >
+                <Modal.Header >
                 <Modal.Title>Welcome to Tetris in React!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

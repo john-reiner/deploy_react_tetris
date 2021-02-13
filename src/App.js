@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import './App.css';
 import Tetris from './components/Tetris';
@@ -7,11 +7,11 @@ import SignUp from './components/SignUp';
 
 const App = () =>  {
 
-  const [loginShow, setLoginShow] = useState(true);
+  const [loginShow, setLoginShow] = useState(false);
   const [signUpShow, setSignUpShow] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [loggedinUser, setLoggedinUser] = useState(false)
+  const [loggedinUser, setLoggedinUser] = useState({})
   const [loggingIn, setLoggingIn] = useState(false)
   const [errors, setErrors] = useState('')
 
@@ -22,27 +22,48 @@ const App = () =>  {
   const handleUsernameChange = e => setUsername(e.target.value)
   const handlePasswordChange = e => setPassword(e.target.value)
 
+  useEffect(() => {
+    if (localStorage.getItem('userToken')) {
+      getUser()
+    } else {
+      setLoginShow(true)
+    }
+  }, [])
+
+  const getUser = () => {
+    fetch(`https://react-tetris-backend.herokuapp.com/api/v2/getuser`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': "bearer " + localStorage.getItem('userToken')
+      }
+    })
+    .then(response => response.json())
+    .then(user => setLoggedinUser(user))
+  }
+
   const loginUser = () => {
-      fetch('https://react-tetris-backend.herokuapp.com/api/v2/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({username, password}),
-      })
-      .then(response => response.json())
-      .then(user => {
-          if (user.status === 'success') {
-              localStorage.setItem('userToken', user.token);
-              console.log(user)
-              setLoggingIn(false)
-              handleLoginClose()
-          } else {
-              setLoggingIn(false)
-              setErrors(user.message)
-          }
-      })
-      setLoggingIn(true)
+    fetch('https://react-tetris-backend.herokuapp.com/api/v2/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({username, password}),
+    })
+    .then(response => response.json())
+    .then(user => {
+      if (user.status === 'success') {
+          localStorage.setItem('userToken', user.token);
+          console.log(user)
+          setLoggedinUser({id: user.id, username: user.username})
+          setLoggingIn(false)
+          handleLoginClose()
+      } else {
+          setLoggingIn(false)
+          setErrors(user.message)
+      }
+    })
+    setLoggingIn(true)
   }
 
   const handleLoginSubmit = e => {
@@ -75,11 +96,13 @@ const App = () =>  {
       <SignUp 
         handleLoginShow={handleLoginShow} 
         signUpShow={signUpShow} 
-        handleSignUpClose={handleSignUpClose} 
+        handleSignUpClose={handleSignUpClose}
+
       />
 
       <Tetris 
-        loggedinUser={loggedinUser} 
+        loggedinUser={loggedinUser}
+
       />
 
     </div>

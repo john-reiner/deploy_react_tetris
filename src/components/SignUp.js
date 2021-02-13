@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {Button, Modal, Form} from 'react-bootstrap'
 
 
-export default function LogIn(props) {
+export default function SignUp(props) {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -15,29 +15,32 @@ export default function LogIn(props) {
 
     const onSubmit = e => {
         e.preventDefault()
-        if (username !== '' && password !== '' && password === confirmedPassword) {
-            fetch("https://react-tetris-backend.herokuapp.com/api/v1/users", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username: username,
-                    password: password,
-                })
+
+        fetch("https://react-tetris-backend.herokuapp.com/api/v2/users", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
             })
-            props.handleSignUpClose()
-            props.handleLoginShow()
-        } else {
-            alert('Feilds are empty or Passwords do not match')
-        }
-        
+        })
+        .then(response => response.json())
+        .then(response => {
+            if (response.status === "SUCCESS") {
+                props.handleSignUpClose()
+                props.handleLoginShow()
+            } else {
+                console.log(response)
+            }
+        })
     }
 
     return (
         <div>
-            <Modal show={props.signUpShow} onHide={props.handleSignUpClose} >
-                <Modal.Header closeButton>
+            <Modal show={props.signUpShow} >
+                <Modal.Header>
                 <Modal.Title>Create an Account!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
