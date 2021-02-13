@@ -11,8 +11,9 @@ const App = () =>  {
   const [signUpShow, setSignUpShow] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [loggedinUser, setLoggedinUser] = useState({})
+  const [loggedinUser, setLoggedinUser] = useState(false)
   const [loggingIn, setLoggingIn] = useState(false)
+  const [errors, setErrors] = useState('')
 
   const handleLoginShow = () => setLoginShow(true);
   const handleLoginClose = () => setLoginShow(false);
@@ -21,22 +22,28 @@ const App = () =>  {
   const handleUsernameChange = e => setUsername(e.target.value)
   const handlePasswordChange = e => setPassword(e.target.value)
 
-    const loginUser = () => {
-        fetch('https://react-tetris-backend.herokuapp.com/api/v1/users')
-        .then(response => response.json())
-        .then(users => {
-            let user = users.find(user => user.username === username)
-            if (user && user.password ===  password) {
-                setLoggedinUser(user)
-                setLoggingIn(false)
-                handleLoginClose()
-            } else {
-                alert('Wrong Username or Password')
-                setLoggingIn(false)
-            }
-        })
-        setLoggingIn(true)
-    }
+  const loginUser = () => {
+      fetch('https://react-tetris-backend.herokuapp.com/api/v2/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({username, password}),
+      })
+      .then(response => response.json())
+      .then(user => {
+          if (user.status === 'success') {
+              localStorage.setItem('userToken', user.token);
+              console.log(user)
+              setLoggingIn(false)
+              handleLoginClose()
+          } else {
+              setLoggingIn(false)
+              setErrors(user.message)
+          }
+      })
+      setLoggingIn(true)
+  }
 
   const handleLoginSubmit = e => {
     e.preventDefault()
@@ -51,9 +58,29 @@ const App = () =>  {
   return (
     <div className="App">
       
-      <LogIn loggingIn={loggingIn} username={username} password={password} handlePasswordChange={handlePasswordChange} handleUsernameChange={handleUsernameChange} handleCreateAccountClick={handleCreateAccountClick} handleLoginSubmit={handleLoginSubmit} handleLoginClose={handleLoginClose} loginShow={loginShow}/>
-      <SignUp handleLoginShow={handleLoginShow} signUpShow={signUpShow} handleSignUpClose={handleSignUpClose} />
-      <Tetris loggedinUser={loggedinUser} />
+      <LogIn 
+        errors={errors} 
+        loggingIn={loggingIn} 
+        username={username} 
+        password={password} 
+        handlePasswordChange={handlePasswordChange} 
+        handleUsernameChange={handleUsernameChange} 
+        handleCreateAccountClick={handleCreateAccountClick} 
+        handleLoginSubmit={handleLoginSubmit} 
+        handleLoginClose={handleLoginClose} 
+        loginShow={loginShow}
+
+      />
+
+      <SignUp 
+        handleLoginShow={handleLoginShow} 
+        signUpShow={signUpShow} 
+        handleSignUpClose={handleSignUpClose} 
+      />
+
+      <Tetris 
+        loggedinUser={loggedinUser} 
+      />
 
     </div>
   )
