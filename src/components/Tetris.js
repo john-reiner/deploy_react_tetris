@@ -18,6 +18,7 @@ import StartButton from './StartButton';
 import NavBar from './NavBar'
 import LeaderBoard from './LeaderBoard'
 import Name from './Name'
+import GameOver from './GameOver'
 
 const Tetris = (props) => {
     const [dropTime, setDropTime] = useState(null);
@@ -25,8 +26,9 @@ const Tetris = (props) => {
     const [scores, setScores] = useState([])
     const [userScores, setUserScores] = useState([])
     const [lastScore, setLastScore] = useState({})
-    const [name, setName] = useState('')
+    const [name, setName] = useState('John')
     const [nameShow, setNameShow] = useState(false)
+    const [gameOverShow, setGameOverShow] = useState(false)
 
     const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
     const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
@@ -39,7 +41,6 @@ const Tetris = (props) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': "bearer " + localStorage.getItem('userToken')
             }
         })
         .then(response => response.json())
@@ -52,7 +53,7 @@ const Tetris = (props) => {
 
     useEffect(() => {
         if (gameOver) {
-            setNameShow(true)
+            handleGameOverModalShow(true)
         }
     }, [gameOver])
 
@@ -86,8 +87,6 @@ const Tetris = (props) => {
             if (player.pos.y < 1) {
             setGameOver(true);
             setDropTime(null);
-            // fetchLevel(level)
-            fetchScore()
             }
             updatePlayerPos({ x: 0, y: 0, collided: true });
         }
@@ -124,30 +123,18 @@ const Tetris = (props) => {
         drop();
     }, dropTime)
 
-    const fetchScore = () => {
-        fetch("https://react-tetris-backend.herokuapp.com/api/v2/scores", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': "bearer " + localStorage.getItem('userToken')
-            },
-            body: JSON.stringify({
-                name: name,
-                points: score,
-                rows: rows,
-                level: level
-            })
-        })
-        .then(response => response.json())
-        .then(score => {
-            setLastScore(score)
-        })
-    }
+
 
     const handleNameModalShow = () => setNameShow(true)
     const handleNameModalClose = () => setNameShow(false)
 
     const handleNameChange = e => setName(e.target.value)
+
+    const handleGameOverModalShow = () => setGameOverShow(true)
+    const handleGameOverModalClose = () => setGameOverShow(false)
+
+    const handleGameOverNameChange = e => setName(e.target.value)
+
 
     return (
         
@@ -156,7 +143,23 @@ const Tetris = (props) => {
             name={name}
             handleNameModalShow={handleNameModalShow}
         />
-        <Name nameShow={nameShow} handleNameModalClose={handleNameModalClose} setName={setName} handleNameChange={handleNameChange} name={name}/>
+        <Name 
+            nameShow={nameShow} 
+            handleNameModalClose={handleNameModalClose} 
+            setName={setName} 
+            handleNameChange={handleNameChange} 
+            name={name}
+
+            />
+        <GameOver
+            handleGameOverNameChange={handleGameOverNameChange} 
+            handleGameOverModalClose={handleGameOverModalClose} 
+            gameOverShow={gameOverShow}
+            name={name}
+            score={score}
+            level={level}
+            rows={rows}
+            />
         <Route exact path="/leaderBoard" render={() => <LeaderBoard scores={scores}/>}/>
         
         <Route exact path="/deploy_react_tetris/" render={() => 
