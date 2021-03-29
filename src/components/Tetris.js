@@ -140,7 +140,9 @@ const Tetris = (props) => {
 
     const handleNameModalShow = () => setNameShow(true)
     const handleNameModalClose = () => setNameShow(false)
-    console.log(nameShow)
+
+    const handleNameChange = e => setName(e.target.value)
+
     return (
         
     <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)} onKeyUp={keyUp}>
@@ -148,7 +150,7 @@ const Tetris = (props) => {
             name={name}
             handleNameModalShow={handleNameModalShow}
         />
-        <Name nameShow={nameShow} handleNameModalClose={handleNameModalClose} />
+        <Name nameShow={nameShow} handleNameModalClose={handleNameModalClose} setName={setName} handleNameChange={handleNameChange} name={name}/>
         <Route exact path="/leaderBoard" render={() => <LeaderBoard scores={scores}/>}/>
         
         <Route exact path="/deploy_react_tetris/" render={() => 
