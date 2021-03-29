@@ -17,6 +17,7 @@ import Display from './Display';
 import StartButton from './StartButton';
 import NavBar from './NavBar'
 import LeaderBoard from './LeaderBoard'
+import Name from './Name'
 
 const Tetris = (props) => {
     const [dropTime, setDropTime] = useState(null);
@@ -24,6 +25,9 @@ const Tetris = (props) => {
     const [scores, setScores] = useState([])
     const [userScores, setUserScores] = useState([])
     const [lastScore, setLastScore] = useState({})
+    const [name, setName] = useState('')
+    const [nameShow, setNameShow] = useState(false)
+
     const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
     const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
     const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(
@@ -134,13 +138,17 @@ const Tetris = (props) => {
         })
     }
 
+    const handleNameModalShow = () => setNameShow(true)
+    const handleNameModalClose = () => setNameShow(false)
+    console.log(nameShow)
     return (
         
     <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)} onKeyUp={keyUp}>
         <NavBar 
-            loggedinUser={props.loggedinUser}
-            handleUserModalShow={props.handleUserModalShow}
+            name={name}
+            handleNameModalShow={handleNameModalShow}
         />
+        <Name nameShow={nameShow} handleNameModalClose={handleNameModalClose} />
         <Route exact path="/leaderBoard" render={() => <LeaderBoard scores={scores}/>}/>
         
         <Route exact path="/deploy_react_tetris/" render={() => 
