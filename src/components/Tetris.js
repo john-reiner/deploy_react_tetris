@@ -50,6 +50,12 @@ const Tetris = (props) => {
         })
     }, [lastScore, props.loggedinUser])
 
+    useEffect(() => {
+        if (gameOver) {
+            setNameShow(true)
+        }
+    }, [gameOver])
+
     const movePlayer = dir => {
         if (!checkCollision(player, stage, { x: dir, y: 0 })) {
             updatePlayerPos({ x: dir, y: 0 });
@@ -126,7 +132,7 @@ const Tetris = (props) => {
                 'Authorization': "bearer " + localStorage.getItem('userToken')
             },
             body: JSON.stringify({
-                user_id: props.loggedinUser.id,
+                name: name,
                 points: score,
                 rows: rows,
                 level: level
