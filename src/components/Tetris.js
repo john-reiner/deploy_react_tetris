@@ -16,9 +16,7 @@ import Stage from './Stage';
 import Display from './Display';
 import StartButton from './StartButton';
 import NavBar from './NavBar'
-// import LogIn from './LogIn'
 import LeaderBoard from './LeaderBoard'
-import SignUp from './SignUp'
 
 const Tetris = (props) => {
     const [dropTime, setDropTime] = useState(null);
@@ -144,7 +142,7 @@ const Tetris = (props) => {
             handleUserModalShow={props.handleUserModalShow}
         />
         <Route exact path="/leaderBoard" render={() => <LeaderBoard scores={scores}/>}/>
-        <Route path="/sign-up" render={() => <SignUp/ >} />
+        
         <Route exact path="/deploy_react_tetris/" render={() => 
             <StyledTetris>
             <Stage stage={stage} />

@@ -18,7 +18,7 @@ export default function DisplayUser(props) {
             </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <Button variant="danger" onClick={props.logout}>Logout</Button>
+            <Button variant="danger" onClick={props.logout}>Logout</Button>{' '}
             <Button variant="success">Keep Playing</Button>
             </Modal.Body>
         </Modal>
