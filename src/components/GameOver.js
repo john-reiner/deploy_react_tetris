@@ -30,7 +30,7 @@ export default function GameOver(props) {
                 <p>Rows: {props.rows}</p>
                 <p>Level: {props.level}</p>
                 <Form.Group>
-                    <Form.Label>Please enter a name to use for your score:</Form.Label>
+                    <Form.Label>Please enter Your name for your score:</Form.Label>
                     <Form.Control type="text" value={props.name} onChange={props.handleGameOverNameChange} />
                 </Form.Group>
             </Modal.Body>

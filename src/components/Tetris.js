@@ -35,10 +35,20 @@ const Tetris = (props) => {
     );
 
     useEffect(() => {
+        if (localStorage.getItem('tetrisName') !== "") {
+            setName(localStorage.getItem('tetrisName'))
+        }
+    }, [])
+
+    useEffect(() => {
         if (gameOver) {
             handleGameOverModalShow(true)
         }
     }, [gameOver])
+
+    useEffect(() => {
+        localStorage.setItem('tetrisName', name)
+    }, [name])
 
     const movePlayer = dir => {
         if (!checkCollision(player, stage, { x: dir, y: 0 })) {
