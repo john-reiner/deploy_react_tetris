@@ -4,20 +4,20 @@ import { Modal, Button, Form } from 'react-bootstrap'
 export default function GameOver(props) {
 
     const fetchScore = () => {
-        console.log(props.name, props.score, props.rows, props.level)
-        // fetch("https://react-tetris-backend.herokuapp.com/api/v2/scores", {
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'application/json',
-                
-        //     },
-        //     body: JSON.stringify({
-        //         name: props.name,
-        //         points: props.score,
-        //         rows: props.rows,
-        //         level: props.level
-        //     })
-        // })
+        
+        fetch("https://react-tetris-backend.herokuapp.com/api/v2/scores", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: props.name,
+                points: props.score,
+                rows: props.rows,
+                level: props.level
+            })
+        })
+        props.handleGameOverModalClose()
     }
 
     return (

@@ -23,10 +23,8 @@ import GameOver from './GameOver'
 const Tetris = (props) => {
     const [dropTime, setDropTime] = useState(null);
     const [gameOver, setGameOver] = useState(false);
-    const [scores, setScores] = useState([])
-    const [userScores, setUserScores] = useState([])
     const [lastScore, setLastScore] = useState({})
-    const [name, setName] = useState('John')
+    const [name, setName] = useState('')
     const [nameShow, setNameShow] = useState(false)
     const [gameOverShow, setGameOverShow] = useState(false)
 
@@ -35,21 +33,6 @@ const Tetris = (props) => {
     const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(
         rowsCleared
     );
-
-    useEffect(() => {
-        fetch('https://react-tetris-backend.herokuapp.com/api/v2/scores',{
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        .then(response => response.json())
-        .then(scores => {
-            // console.log(scores)
-            setScores(scores.all_scores)
-            setUserScores(scores.user_scores)
-        })
-    }, [lastScore, props.loggedinUser])
 
     useEffect(() => {
         if (gameOver) {
@@ -160,7 +143,7 @@ const Tetris = (props) => {
             level={level}
             rows={rows}
             />
-        <Route exact path="/leaderBoard" render={() => <LeaderBoard scores={scores}/>}/>
+        <Route exact path="/leaderBoard" render={() => <LeaderBoard />}/>
         
         <Route exact path="/deploy_react_tetris/" render={() => 
             <StyledTetris>

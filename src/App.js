@@ -6,7 +6,6 @@ import DisplayUser from './components/DisplayUser'
 
 const App = () =>  {
 
-  const [loggedinUser, setLoggedinUser] = useState({})
   const [userModalShow, setUserModalShow] = useState(false)
 
   const handleUserModalShow = () => setUserModalShow(true)
@@ -24,9 +23,7 @@ const App = () =>  {
         handleUserModalClose={handleUserModalClose}
       />
 
-      <Tetris 
-        loggedinUser={loggedinUser}
-      />
+      <Tetris />
 
     </div>
   )
